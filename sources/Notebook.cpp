@@ -9,9 +9,7 @@
 using namespace std;
 namespace ariel
 {
-    Notebook::Notebook()
-    {
-    }
+    Notebook::Notebook(){}
   
     void Notebook::write(int page, int row, int col, Direction d, string t)
     {
@@ -23,26 +21,26 @@ namespace ariel
 
          if (page < 0 || row < 0 || col < 0)
         {
-            throw runtime_error("negative value - page, row, col");
+            throw invalid_argument("negative value - page, row, col");
         }
 
          if (col > Row_Len)
         {
-            throw runtime_error("col out of bounds");
+            throw invalid_argument("col out of bounds");
         }
         
         for (int i = 0; i < len; i++)
         {
             if (t[(size_t)i] < min_Char || t[(size_t)i] > max_Char )
             {
-                throw runtime_error("invalid char");
+                throw invalid_argument("invalid char");
             }
             
         }
         
         if (col + len > Row_Len && d == Direction::Horizontal)
         {
-            throw runtime_error("cannot exceeded raw len");
+            throw invalid_argument("cannot exceeded raw len");
         }
 
         if (d == Direction::Horizontal)
@@ -51,7 +49,7 @@ namespace ariel
             {
                 if (t[(size_t)i] == '~' || n[page][row][col + i] == '~')
                 {
-                    throw runtime_error("Unable to rewrite or to write on deleted place ");
+                    throw invalid_argument("Unable to rewrite or to write on deleted place ");
                 }
                 if (min_Char <= n[page][row][col + i] && n[page][row][col + i] <= max_Char)
                 {
@@ -61,7 +59,7 @@ namespace ariel
                     }
                     else
                     {
-                        throw runtime_error("Unable to rewrite");
+                        throw invalid_argument("Unable to rewrite");
                     }
                 }
                 else
@@ -76,7 +74,7 @@ namespace ariel
             {
                 if (t[(size_t)i] == '~' || n[page][row + i][col] == '~')
                 {
-                    throw runtime_error("Unable to rewrite or to write on deleted place ");
+                    throw invalid_argument("Unable to rewrite or to write on deleted place ");
                 }
                 if (min_Char <= n[page][row + i][col] && n[page][row + i][col] <= max_Char)
                 {
@@ -86,7 +84,7 @@ namespace ariel
                     }
                     else
                     {
-                        throw runtime_error("Unable to rewrite");
+                        throw invalid_argument("Unable to rewrite");
                     }
                 }
                 else
@@ -110,18 +108,18 @@ namespace ariel
 
         if (page < 0 || row < 0 || col < 0 || len < 0)
         {
-            throw runtime_error("negative value - page, row, col, len");
+            throw invalid_argument("negative value - page, row, col, len");
         }
 
         if (col > Row_Len)
         {
-            throw runtime_error("col out of bounds");
+            throw invalid_argument("col out of bounds");
         }
 
 
         if (col + len > Row_Len + 1 && d == Direction::Horizontal)
         {
-            throw runtime_error("cannot read more then 100 characters");
+            throw invalid_argument("cannot read more then 100 characters");
         }
         
         string text;
@@ -166,17 +164,17 @@ namespace ariel
         
         if (page < 0 || row < 0 || col < 0 || len < 0)
         {
-            throw runtime_error("negative value - page, row, col, len");
+            throw invalid_argument("negative value - page, row, col, len");
         }
 
         if (col > Row_Len)
         {
-            throw runtime_error("col out of bounds");
+            throw invalid_argument("col out of bounds");
         }
 
         if (col + len > Row_Len  && d == Direction::Horizontal)
         {
-            throw runtime_error("cannot erase more then 100 characters");
+            throw invalid_argument("cannot erase more then 100 characters");
         }
 
        
@@ -203,7 +201,7 @@ namespace ariel
     {
         if (page < 0)
         {
-            throw runtime_error("negative value - page");
+            throw invalid_argument("negative value - page");
         }
         cout << "page" << n[page][1][1];
     }
